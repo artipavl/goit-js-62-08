@@ -2,7 +2,9 @@ const formEl = document.querySelector('.feedback-form');
 const emailFormEl = document.querySelector('[name="email"]');
 const messageFormEl = document.querySelector('[name="message"]');
 
-formEl.addEventListener('input', setInputFormInLH);
+const throttle = require('lodash.throttle');
+
+formEl.addEventListener('input', throttle(setInputFormInLH, 500));
 formEl.addEventListener('submit', submitForm);
 
 let formLog = {};
