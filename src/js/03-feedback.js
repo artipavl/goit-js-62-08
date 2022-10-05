@@ -5,7 +5,7 @@ const messageFormEl = document.querySelector('[name="message"]');
 const throttle = require('lodash.throttle');
 
 formEl.addEventListener('input', throttle(setInputFormInLH, 500));
-formEl.addEventListener('submit', submitForm);
+formEl.addEventListener('submit', onFormSubmit);
 
 let formLog = {};
 
@@ -20,7 +20,7 @@ function setInputFormInLH(e) {
   localStorage.setItem('feedback-form-state', JSON.stringify(formLog));
 }
 
-function submitForm(e) {
+function onFormSubmit(e) {
   e.preventDefault();
 
   const {
