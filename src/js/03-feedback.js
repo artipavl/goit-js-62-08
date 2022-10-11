@@ -11,8 +11,12 @@ let formLog = {};
 
 if (localStorage.getItem('feedback-form-state')) {
   formLog = JSON.parse(localStorage.getItem('feedback-form-state'));
-  emailFormEl.value = formLog.email;
-  messageFormEl.value = formLog.message;
+  if (formLog.email) {
+    emailFormEl.value = formLog.email;
+  }
+  if (formLog.message) {
+    messageFormEl.value = formLog.message;
+  }
 }
 
 function setInputFormInLH(e) {
@@ -27,9 +31,11 @@ function onFormSubmit(e) {
     elements: { email, message },
   } = e.currentTarget;
 
-  if (email.value === '' || message.value === '') {
-    return alert('Заповніть поля');
+  if (!email.value || !message.value.trim()) {
+     alert("Заповніть всі поля");
+    return;
   }
+
   // Створив окремий об'єкт для формування даних з форми
   // міг використовувати для цього formLog (не став використовувати згадавши про поле паролю, та вирішив що доцільно використовувати інший об’єкт )
 
@@ -43,4 +49,5 @@ function onFormSubmit(e) {
 
   e.currentTarget.reset();
   localStorage.removeItem('feedback-form-state');
+  formLog = {};
 }
